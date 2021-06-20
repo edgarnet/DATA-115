@@ -1,0 +1,41 @@
+---
+title: "Homework3"
+author: "Your Name"
+date: "6/7/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,tidy=TRUE)
+```
+
+
+## Problem1- 10 points
+
+You have learnt the concepts of supervised and un-supervised learning by now. For unsupervised learning algorithms you have learnt Cluster Analysis, Dimension reduction techniques - PCA. For supervised learning algorithms, you have learnt - multiple linear regression ( if your response is continuous variable), logistic regression ( response is binary) - also a type of classification. For your final project dataset, which technique do you propose that will answer your big question?
+
+Show some plots and give some arguments in support of your choice.
+
+
+## Problem 2 : Multiple Linear Regression ( Refer: regression.rmd file posted under Lab Materials)-15 points
+
+1)Load the "Credit" dataset in R from the "ISLR" package. Perform a multiple linear regression in R with "Balance" as the response and "Income", "Age" and "Education" as the predictors.
+
+
+2) Before fitting a model, create a correlation plot/matrix/individual scatter plots and comment on the linearity. Do you think a multiple linear regression model would make sense ?
+
+
+3) Fit a Multiple linear regression model and interpret all the parameter estimates
+
+
+4) Check model assumptions and comment
+
+
+
+## Problem 3 : Principal Component Analysis ( Ref: PCA_Cluster_Examples.rmd under Week3_R Examples for Cluster Analysis and PCA) - 10 points
+
+Perform PCA on the Credit dataset with Income, Age and Education variables. How many PC's did you extract ? What percent of variability did the PC's you extract cumulatively explain? Comment on your findings and provide necessary plots in support of your findings.
+
+
+## Extra Credit (10 points) : Perform a multiple linear regression using "Balance" as response and the selected Principal Components as the explanatory variables. Which model do you think makes more sense ? Look at it in terms of intepretability and also it's coefficient of variation.
+

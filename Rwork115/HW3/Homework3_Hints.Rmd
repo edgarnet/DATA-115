@@ -1,0 +1,107 @@
+---
+title: "Homework3"
+author: "Your Name"
+date: "6/7/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,tidy=TRUE)
+```
+
+
+## Problem1- 10 points
+
+You have learnt the concepts of supervised and un-supervised learning by now. For unsupervised learning algorithms you have learnt Cluster Analysis, Dimension reduction techniques - PCA. For supervised learning algorithms, you have learnt - multiple linear regression ( if your response is continuous variable), logistic regression ( response is binary) - also a type of classification. For your final project dataset, which technique do you propose that will answer your big question?
+
+Show some plots and give some arguments in support of your choice.
+
+#### What I am expecting from you is - 
+* You have a Big Question for your analysis already. What technique are you proposing to answer your "Big question" or objective of study. If you choose to do linear regression, argue why did you choose linear regression by showing a supporting scatter plot betweem your X and Y variables. If you choose to do a logistic regression, show a box plot for X variable for two different categories of Y variable etc.
+
+
+## Problem 2 : Multiple Linear Regression ( Refer: regression.rmd file posted under Lab Materials)-15 points
+
+1)Load the "Credit" dataset in R from the "ISLR" package. Perform a multiple linear regression in R with "Balance" as the response and "Income", "Age" and "Education" as the predictors.
+
+```{r Model}
+# Load the ISLR library
+# call the Credit data 
+# Run linear regression model with "Balance" as the response or Y variable and Age,Income and Education as your predictors
+# Code Hint : model <- lm( Balance ~ Age + Education+Income, data=Credit) 
+#             summary(model)
+
+# REFER to line 69-71 in Regression.rmd file shared under "Lab Materials" in Blackboard
+```
+
+
+2) Before fitting a model, create a correlation plot/matrix/individual scatter plots and comment on the linearity. Do you think a multiple linear regression model would make sense ?
+
+```{r Plot}
+#Create 3 scatter plots : 
+# Balance versus Age
+  # Hint code : ggplot(Credit, aes(x=Age,y=Balance)) +geom_point(color='blue')
+# Balance versus Education
+# Balance versus Income 
+# Check if these shows a linear pattern. If if does, a linear regression model would make sense.
+
+# You can also do a Correlation Plot using the function ggpairs from GGally package in R instead of doing 3 scatter plots. It will give you a fancier visualization. Your choice!
+
+```
+
+3) Fit a Multiple linear regression model and interpret all the parameter estimates
+
+```{r Interpretation}
+# When you run summary(model), you will be able to see three estimated values :
+# 1) One for intercept
+# 2) One corresponding to Age 
+# 3) One correspondig to Education
+# 4) One corresponding to Income
+
+# Recall you linear regression model looks like : Balance = b0+ b1 Age + b2 Education + b3 Income + Error
+# The coefficent estimates you see from the model summary are corresponding to b0,b1 ,b2 and b3.
+# b0 is the intercept. It is the balance when Age, Education and Income is 0. However, intercept might not always have a physical interpretation. Can you point out if in this case intercept have a meaningful interpretation ?
+# b1 is the change in Balance due to a unit increase in Age , where education and Income are constant
+# Similarly interpet b2 and b3
+
+# Refer to Line 79-84 for Model interpretation in Regression.rmd file shared under "Lab Materials" in Blackboard
+
+```
+
+4) Check model assumptions and comment
+
+```{r Model Assumptions}
+# Refer to line 129-153 in Regression.rmd file shared under "Lab Materials" in Blackboard
+# Create a qqplot of the residuals to check normality 
+# Create residuals versus fitted plot to comment on the assumption of constant variance
+
+```
+
+
+## Problem 3 : Principal Component Analysis ( Ref: PCA_Cluster_Examples.rmd under Week3_R Examples for Cluster Analysis and PCA) - 10 points
+
+Perform PCA on the Credit dataset with Income, Age and Education variables. How many PC's did you extract ? What percent of variability did the PC's you extract cumulatively explain? Comment on your findings and provide necessary plots in support of your findings.
+
+```{r PCA}
+# Creat a new dataset by removing the "Balance" variable from the Credit dataset
+# hint Code: Credit_1 = select(Credit, c(Income,Age,Education))
+
+# Run a PCA on Credit_1 dataset
+# hint Code : pca <- prcomp(Credit_1)
+             # summary(pca)
+
+# Look at the cumulative proportion of variance section. You might want to choose first few PC's that explains at least 90% of variability
+
+```
+
+
+
+
+## Extra Credit (10 points) : Perform a multiple linear regression using "Balance" as response and the selected Principal Components as the explanatory variables. Which model do you think makes more sense ? Look at it in terms of intepretability and also it's coefficient of variation.
+
+```{r Linear Regression with PCA}
+# Suppose you have selected first 3 Principal components (PC's). 
+# Perform a linear regresion with Balance as your Y varibale and PC1, PC2 and PC3 as your predictors. Follow the steps done in Problem 2 and compare which model is better. THINK & EXPLORE! 
+
+```
+
