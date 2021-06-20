@@ -1,0 +1,78 @@
+---
+title: "Homework 2"
+author: "Write Your Name"
+date: "Enter Date"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Problem 1 (8 points)
+
+Which dataset did you chose for your final project? Refer to the Final Project Guidelines under Week3 module. What is the your "Big Question" that you want to answer? What are the steps you took to clean and process your data in R ?
+
+```{r Data Pre-processing for Final Project}
+# Write your code and comments here
+
+```
+
+
+# Problem 2 (24 points)
+
+Load the Height_Weight_Age_Sex.csv data into R. 
+ 
+### (a) 
+Comment on Tukey's five point summary, outliers, missing values for each of the variables
+ 
+### (b) 
+Create  boxplots for the height and weight columns separately. Comment on the symmetry and sknewness, if any, for their distributions using these plots.
+
+### (c)
+Create  histograms for the height and weight columns separately. Comment on the symmetry and sknewness, if any, for their
+distributions using these plots.  Are your conclusions based on the boxplots in (a) consistent with those based on densities?
+
+### (d)
+Create separate boxplots for the weight data separated by the Male variable. What do you observe about the two distributions? 
+
+### (e)
+Add a BMI column and an underweight column to the data frame: 
+
+``` {r newcolumns}
+HWAS <- read.csv("./Height_Weight_Age_Sex.csv")
+
+HWAS$BMI <- HWAS$weight/((HWAS$height/100)**2)
+
+HWAS$underweight <- HWAS$BMI <18.5
+
+head(HWAS)
+
+```
+
+### (f)
+Create separate histograms for the BMI column separated by the Male variable. What do you observe about the two distributions?
+
+### (g)
+
+Make a scatterplot of height vs. weight for the full dataset that distinguishes both the Male variable and the under variable. What do you observe?
+
+
+# Problem 3 (18 points)
+
+Now that you have learnt how to do different plots in R ,write a brief description in your own words of each of the types of chart or graph below: 
+
+### (a) Bar Chart
+
+### (b) Scatter Plot
+
+### (c) Line Plot
+
+### (d) Box Plot
+
+### (e) Histogram
+
+### (f) Pie Chart
+
+
+
