@@ -1,7 +1,7 @@
 ---
 title: "Homework 2"
-author: "Write Your Name"
-date: "Enter Date"
+author: "Edgar Perez"
+date: "June 1, 2021"
 output: pdf_document
 ---
 
@@ -21,20 +21,44 @@ Which dataset did you chose for your final project? Refer to the Final Project G
 
 # Problem 2 (24 points)
 
-Load the Height_Weight_Age_Sex.csv data into R. 
+Load the Height_Weight_Age_Sex.csv data into R.
+```{r read hwk2 file}
+hwk2.dat <- read.csv('./Height_Weight_Age_Sex.csv')
+View(hwk2.dat)
+```
  
 ### (a) 
-Comment on Tukey's five point summary, outliers, missing values for each of the variables
+Comment on Tukey's five point summary, outliers, missing values for each of the variables:
+```{r create Tukey summary}
+summary(hwk2.dat)
+```
  
 ### (b) 
-Create  boxplots for the height and weight columns separately. Comment on the symmetry and sknewness, if any, for their distributions using these plots.
+Create  boxplots for the height and weight columns separately. Comment on the symmetry and skewness, if any, for their distributions using these plots.
+
+```{r create boxplots for height and weight}
+boxplot(hwk2.dat$height, main="Height Boxplot", ylab="Height in cm")
+boxplot(hwk2.dat$weight, main="Weight Boxplot", ylab="Weight in kg")
+```
 
 ### (c)
-Create  histograms for the height and weight columns separately. Comment on the symmetry and sknewness, if any, for their
+Create  histograms for the height and weight columns separately. Comment on the symmetry and skewness, if any, for their
 distributions using these plots.  Are your conclusions based on the boxplots in (a) consistent with those based on densities?
 
+```{r create histograms for height and weight}
+hist(hwk2.dat$height, col="green", main="Height Histogram", xlab="Height in cm")
+hist(hwk2.dat$weight, col="orange", main="Weight Histogram", xlab="Weight in kg")
+```
+
 ### (d)
-Create separate boxplots for the weight data separated by the Male variable. What do you observe about the two distributions? 
+Create separate boxplots for the weight data separated by the Male variable. What do you observe about the two distributions?
+
+```{r create historgrams for weight v sex}
+m <- hwk2.dat[hwk2.dat$male==1,]
+f <- hwk2.dat[hwk2.dat$male==0,]
+hist(m$weight, col="blue", main="Male Weight Histogram", xlab="Weight in kg")
+hist(f$weight, col="pink", main="Female Weight Histogram", xlab="Weight in kg")
+```
 
 ### (e)
 Add a BMI column and an underweight column to the data frame: 
@@ -53,10 +77,25 @@ head(HWAS)
 ### (f)
 Create separate histograms for the BMI column separated by the Male variable. What do you observe about the two distributions?
 
+```{r create BMI histograms}
+m <- HWAS[HWAS$male==1,]
+f <- HWAS[HWAS$male==0,]
+hist(m$BMI, col="blue", main="Male BMI Histogram", xlab="kg/m²")
+hist(f$BMI, col="pink", main="Female BMI Histogram", xlab="kg/m²")
+```
+
 ### (g)
 
 Make a scatterplot of height vs. weight for the full dataset that distinguishes both the Male variable and the under variable. What do you observe?
 
+```{r create scatterplots for height and weight}
+u <- HWAS[HWAS$underweight==1,]
+o <- HWAS[HWAS$underweight==0,]
+plot(m$height, m$weight, main="Male Scatterplot", xlab="Weight in kg", ylab="Height in cm")
+plot(f$height, f$weight, main="Female Scatterplot", xlab="Weight in kg", ylab="Height in cm")
+plot(u$height, u$weight, main="Underweight Scatterplot", xlab="Weight in kg", ylab="Height in cm")
+plot(o$height, o$weight, main="Aboveweight Scatterplot", xlab="Weight in kg", ylab="Height in cm")
+```
 
 # Problem 3 (18 points)
 
