@@ -1,12 +1,15 @@
 ---
 title: "Homework3"
-author: "Your Name"
+author: "Edgar Perez"
 date: "6/7/2021"
 output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,tidy=TRUE)
+library(ISLR)
+library(ggpubr)
+library(PerformanceAnalytics)
 ```
 
 
@@ -21,16 +24,62 @@ Show some plots and give some arguments in support of your choice.
 
 1)Load the "Credit" dataset in R from the "ISLR" package. Perform a multiple linear regression in R with "Balance" as the response and "Income", "Age" and "Education" as the predictors.
 
+```{r analyze Credit dataset}
+model <- lm(Balance ~ Income + Age + Education, data=Credit)
+summary(model)
+```
 
 2) Before fitting a model, create a correlation plot/matrix/individual scatter plots and comment on the linearity. Do you think a multiple linear regression model would make sense ?
 
+```{r create correlation plots}
+ggscatter(Credit, x = "Balance", y = "Income",
+          add = "reg.line", conf.int = TRUE,
+          cor.coef = TRUE, cor.method = "pearson",
+          main="Income Correlation Plot",
+          xlab="Balance ($)", ylab="Income ($1K)")
+ggscatter(Credit, x = "Balance", y = "Age",
+          add = "reg.line", conf.int = TRUE,
+          cor.coef = TRUE, cor.method = "pearson",
+          main="Age Correlation Plot",
+          xlab="Balance ($)", ylab="Age")
+ggscatter(Credit, x = "Balance", y = "Education",
+          add = "reg.line", conf.int = TRUE,
+          cor.coef = TRUE, cor.method = "pearson",
+          main="Education Correlation Plot",
+          xlab="Balance ($)", ylab="Education (years)")
+```
+```{r create correlation matrix}
+c_data <- Credit[, c(2,6,7,12)]
+chart.Correlation(c_data, histogram = TRUE, pch=19)
+```
+```{r create scatter plots}
+plot(Credit$Balance, Credit$Income, main="Income Scatterplot", ylab="Income ($1K)", xlab="Balance ($)", pch=19)
+plot(Credit$Balance, Credit$Age, main="Age Scatterplot", ylab="Age", xlab="Balance ($)", pch=19)
+plot(Credit$Balance, Credit$Education, main="Education Scatterplot", ylab="Education (years)", xlab="Balance ($)", pch=19)
+```
+
+A multiple linear regression is unnecessary for the predictors analyzed since the correlation plots and matrix clearly show that Income is the only predictor that scales linearly with respect to the Balance of the customers surveyed.
 
 3) Fit a Multiple linear regression model and interpret all the parameter estimates
 
+```{r generate model summary for reference}
+summary(model)
+```
+
+The intercept gives us an average balance of $348.81, when Income, Age, and Education are nonexistent. The only problem with this interpretation is that Age being 0 is highly unlikely, that is unless credit can be taken out under an infant's name.
+
+The Income coefficient of \$6.24 tells us that for every dollar increase in one's Balance, a corresponding increasing of \$6.24 should be expected from Income.
+
+The Age coefficient of -\$2.18 suggests that Balance decreases that amount for every year someone has lived. This makes sense as older customers take on less risk and thus less credit than younger clients.
+
+The Education coefficient of 81¢ gives a slight increase in one's balance based on the amount of years they've been in school. This could be related to the Balance increase based on Income, since more years in academia often translates to higher income.
 
 4) Check model assumptions and comment
 
-
+```{r check model assumptions}
+plot(model)
+```
+The Residuals vs Fitted chart provides us with a horizontal line across the data which supports a linear relationship in the model.  
 
 ## Problem 3 : Principal Component Analysis ( Ref: PCA_Cluster_Examples.rmd under Week3_R Examples for Cluster Analysis and PCA) - 10 points
 
